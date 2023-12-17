@@ -9,19 +9,20 @@ const SteperControl = () => {
       <button
         onClick={() => handleClick()}
         className={`${
-          currentStep === 1 ? "opacity-50 cursor-not-allowed" : ""
+          currentStep === 1 ? "opacity-50 hidden" : " cursor-pointer  "
         } bg-white text-slate-400 uppercase px-4 py-2 font-semibold 
-        cursor-pointer border-2 border-slate-300 rounded-xl hover:bg-slate-700
+       border-2 border-slate-300 rounded-xl hover:bg-slate-700
         hover:text-white transition duration-200 ease-in-out`}
       >
         Back
       </button>
 
       {/* next-button */}
+      <div></div>
       <button
         type="submit"
         // onClick={() => handleClick("next")}
-        className="bg-green-500 text-white uppercase px-4 py-2 font-semibold 
+        className="bg-green-500 text-white uppercase flex justify-end w-full max-w-max  px-4 py-2 font-semibold 
         cursor-pointer rounded-xl hover:bg-slate-700 hover:text-white transition
         duration-200 ease-in-out"
       >

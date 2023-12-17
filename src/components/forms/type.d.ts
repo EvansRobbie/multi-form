@@ -6,6 +6,10 @@ export interface formProps {
   placeholder?: string;
   required?: boolean;
   options?: {
+    name?: {
+      common: string;
+      official: string;
+    };
     key: string;
     value: string;
     more?: string;
@@ -19,6 +23,10 @@ export interface fieldProps {
   placeholder?: string;
   required?: boolean;
   options?: {
+    name?: {
+      common: string;
+      official: string;
+    };
     key: string;
     value: string;
     more?: string;

@@ -2,6 +2,7 @@
 import Account from "@/components/steps/Account";
 import Confirmation from "@/components/steps/Confirmation";
 import Details from "@/components/steps/Details";
+import OuterStepper from "@/components/steps/OuterStepper";
 import Stepper from "@/components/steps/Stepper";
 import { useForm } from "@/context/StepperContext";
 
@@ -20,12 +21,15 @@ export default function Home() {
     }
   };
   return (
-    <main className="md:w-1/2 mx-auto shadow-xl rounded-2xl pb-2 bg-white">
-      <div className="container horizontal  mt-5 ">
-        <Stepper />
-      </div>
-      <div className=" w-full my-8 px-4 min-h-[50vh]">
-        {displaySteps(currentStep)}
+    <main className=" flex w-full flex-col min-h-screen justify-center items-center">
+      <OuterStepper />
+      <div className="md:w-1/2 mx-auto shadow-xl rounded-2xl pb-2 bg-white">
+        <div className="container horizontal  mt-5 ">
+          <Stepper />
+        </div>
+        <div className=" w-full my-8 px-4 min-h-[50vh]">
+          {displaySteps(currentStep)}
+        </div>
       </div>
     </main>
   );

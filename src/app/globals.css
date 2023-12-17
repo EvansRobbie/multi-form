@@ -5,3 +5,17 @@
 body {
   background-color: #f1f5f9;
 }
+input[type="radio"] {
+  accent-color: purple;
+  @apply h-4 w-4 border border-red-500;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  accent-color: purple;
+  @apply h-4 w-4 rounded-full border border-purple-500 relative;
+}
+
+input[type="checkbox"]:checked {
+  @apply border-white border-4;
+}

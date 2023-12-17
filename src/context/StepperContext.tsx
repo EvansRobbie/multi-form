@@ -14,15 +14,20 @@ interface initialProps {
   password: string;
   age: string;
   gender: string;
+  selectOption: string;
 }
 interface contextProps {
   currentStep: number;
   //   setCurrentStep: Dispatch<SetStateAction<number>>;
   userData: initialProps;
   setUserData: Dispatch<SetStateAction<initialProps>>;
-  finalData: string[];
-  setFinalData: Dispatch<SetStateAction<string[]>>;
-  handleClick: (direction?: string, newData?: initialProps) => void;
+  selectedOption: string;
+  setSelectedOption: Dispatch<SetStateAction<string>>;
+  handleClick: (
+    direction?: string,
+    newData?: initialProps,
+    isFinal?: boolean
+  ) => void;
   steps: string[];
 }
 const StepperContext = createContext({} as contextProps);
@@ -34,6 +39,7 @@ const initialValues = {
   password: "",
   age: "",
   gender: "",
+  selectOption: "",
 };
 const StepperContextProvider = ({
   children,
@@ -42,21 +48,42 @@ const StepperContextProvider = ({
 }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [userData, setUserData] = useState(initialValues);
-  const [finalData, setFinalData] = useState<string[]>([]);
+  const [selectedOption, setSelectedOption] = useState("");
   const steps = ["Account", "Details", "Confirmation"];
-  const handleClick = (direction?: string, newData?: {}) => {
+  console.log(userData);
+
+  const makeRequest = async (formData: initialProps) => {
+    console.log("finalData", formData);
+    try {
+      await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleClick = (
+    direction?: string,
+    newData?: initialProps | undefined,
+    isFinal = false
+  ) => {
     setUserData((prev) => ({ ...prev, ...newData }));
     let newStep = currentStep;
     direction === "next" ? newStep++ : newStep--;
     newStep > 0 && newStep <= steps.length && setCurrentStep(newStep);
+    isFinal && makeRequest(newData!);
   };
   return (
     <StepperContext.Provider
       value={{
         userData,
         setUserData,
-        finalData,
-        setFinalData,
+        selectedOption,
+        setSelectedOption,
         handleClick,
         currentStep,
         steps,
